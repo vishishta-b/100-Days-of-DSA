@@ -110,4 +110,71 @@ void pop_back(Deque* dq) {
 // 5. front(): Return the front element
 int front(Deque* dq) {
     if (empty(dq)) {
-        printf
+        printf("Deque is empty!\n");
+        return -1; // Return a sentinel value
+    }
+    return dq->front->data;
+}
+
+// 6. back(): Return the rear element
+int back(Deque* dq) {
+    if (empty(dq)) {
+        printf("Deque is empty!\n");
+        return -1; // Return a sentinel value
+    }
+    return dq->rear->data;
+}
+
+// Additional: clear()
+void clear(Deque* dq) {
+    while (!empty(dq)) {
+        pop_front(dq);
+    }
+}
+
+// Helper function to print the deque state
+void printDeque(Deque* dq) {
+    if (empty(dq)) {
+        printf("Deque is empty.\n");
+        return;
+    }
+    Node* current = dq->front;
+    printf("Deque: [ ");
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("]\n");
+}
+
+int main() {
+    Deque* dq = createDeque();
+
+    printf("Pushing back 10 and 20...\n");
+    push_back(dq, 10);
+    push_back(dq, 20);
+    printDeque(dq);
+
+    printf("Pushing front 5...\n");
+    push_front(dq, 5);
+    printDeque(dq);
+
+    printf("Front element: %d\n", front(dq));
+    printf("Rear element: %d\n", back(dq));
+    printf("Current size: %d\n", size(dq));
+
+    printf("\nPopping front...\n");
+    pop_front(dq);
+    printDeque(dq);
+
+    printf("Popping back...\n");
+    pop_back(dq);
+    printDeque(dq);
+
+    printf("\nClearing the deque...\n");
+    clear(dq);
+    printf("Is deque empty? %s\n", empty(dq) ? "Yes" : "No");
+
+    free(dq);
+    return 0;
+}
